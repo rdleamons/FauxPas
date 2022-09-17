@@ -7,7 +7,9 @@ public class ChangePanelTab : MonoBehaviour
     public GameObject ClothingChange;
     public GameObject BodyChange;
     public GameObject FaceChange;
-    public GameObject[] tab;
+    public GameObject secondTab;
+    public GameObject thirdTab;
+    public GameObject fourthTab;
 
 
     // Start is called before the first frame update
@@ -16,6 +18,9 @@ public class ChangePanelTab : MonoBehaviour
         ClothingChange.SetActive(false);
         BodyChange.SetActive(false);
         FaceChange.SetActive(false);
+        secondTab.SetActive(false);
+        thirdTab.SetActive(false);
+        fourthTab.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,27 +37,5 @@ public class ChangePanelTab : MonoBehaviour
     public void closePanel(GameObject panel)
     {
         panel.SetActive(false);
-    }
-
-    public void openTab(GameObject currTab)
-    {
-        if(currTab == tab[0])
-        {
-            tab[0].SetActive(true);
-            tab[1].SetActive(false);
-            tab[2].SetActive(false);
-        }
-        else if(currTab == tab[1])
-        {
-            tab[0].SetActive(false);
-            tab[1].SetActive(true);
-            tab[2].SetActive(false);
-        }
-        else if(currTab == tab[2])
-        {
-            tab[0].SetActive(false);
-            tab[1].SetActive(false);
-            tab[2].SetActive(true);
-        }
     }
 }

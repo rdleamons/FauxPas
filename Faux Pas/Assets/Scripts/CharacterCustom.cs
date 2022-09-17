@@ -4,98 +4,86 @@ using UnityEngine;
 
 public class CharacterCustom : MonoBehaviour
 {
-    //public GameObject player;
+    // Item renderers
     public SpriteRenderer headRenderer;
     public SpriteRenderer bodyRenderer;
     public SpriteRenderer topRenderer;
     public SpriteRenderer bottomRenderer;
+    
+    // Player object
     public Player player;
 
+    // Arrays of item sprites (player)
     public Sprite[] body;
+    public Sprite[] head;
+    public Sprite[] skin;
+
+    // Arrays of item sprites (clothes)
     public Sprite[] topTee;
     public Sprite[] topSweater;
     public Sprite[] bottomShort;
-    public Sprite[] bottomLong;
 
-    public void changeHead(Sprite head)
+    // Change skin color 
+    public void changeSkin(int color)
     {
-        //player.SpriteRenderer.sprite = head;
-        headRenderer.sprite =  head;
+        player.skinColor = color;
+        changeBody(player.bodyType);
+        changeHead(player.headType);
     }
 
+    // Change head shape
+    public void changeHead(int type)
+    {
+        player.headType = type;
+
+        if (player.skinColor == 0)
+            headRenderer.sprite = head[type];
+        else if (player.skinColor == 1)
+            headRenderer.sprite = head[type + 2];
+        else if (player.skinColor == 2)
+            headRenderer.sprite = head[type + 4];
+    }
+
+    // Change body type 
     public void changeBody(int type)
     {
-        bodyRenderer.sprite = body[type];
         player.bodyType = type;
 
-        changeTop(type);
+        if (player.skinColor == 0)
+            bodyRenderer.sprite = body[type];
+        else if (player.skinColor == 1)
+            bodyRenderer.sprite = body[type + 2];
+        else if (player.skinColor == 2)
+            bodyRenderer.sprite = body[type + 4];
+
+        changeBottom(player.bottomType);
+        changeTop(player.topType);
     }
 
+    // Change top
     public void changeTop(int topType)
     {
-        if(topType == 0) // If top is a tee shirt
+        player.topType = topType;
+        if (player.bodyType == 0)
         {
-            if (player.bodyType == 0)
-            {
-                topRenderer.sprite = topTee[0];
-            }
-            else if (player.bodyType == 1)
-            {
-                topRenderer.sprite = topTee[1];
-            }
-            else if (player.bodyType == 2)
-            {
-                topRenderer.sprite = topTee[2];
-            }
-        }else if(topType == 1) // If top is a sweater
+            topRenderer.sprite = topTee[topType];
+        }else if (player.bodyType == 1)
         {
-            if (player.bodyType == 0)
-            {
-                topRenderer.sprite = topSweater[0];
-            }
-            else if (player.bodyType == 1)
-            {
-                topRenderer.sprite = topSweater[1];
-            }
-            else if (player.bodyType == 2)
-            {
-                topRenderer.sprite = topSweater[2];
-            }
+            topRenderer.sprite = topTee[topType + 1];
         }
-        
     }
 
+    // Change bottoms
     public void changeBottom(int bottomType)
     {
-        if(bottomType == 0) // If bottoms are shorts
+        player.bottomType = bottomType;
+
+        if(player.bodyType == 0)
         {
-            if (player.bodyType == 0)
-            {
-                topRenderer.sprite = bottomShort[0];
-            }
-            else if (player.bodyType == 1)
-            {
-                topRenderer.sprite = bottomShort[1];
-            }
-            else if (player.bodyType == 2)
-            {
-                topRenderer.sprite = bottomShort[2];
-            }
-        } else if(bottomType == 1) // If bottoms are long
+            bottomRenderer.sprite = bottomShort[bottomType];
+        }else if(player.bodyType == 1)
         {
-            if (player.bodyType == 0)
-            {
-                topRenderer.sprite = bottomLong[0];
-            }
-            else if (player.bodyType == 1)
-            {
-                topRenderer.sprite = bottomLong[1];
-            }
-            else if (player.bodyType == 2)
-            {
-                topRenderer.sprite = bottomLong[2];
-            }
+            bottomRenderer.sprite = bottomShort[bottomType + 1];
         }
-        
     }
 }
