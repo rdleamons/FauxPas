@@ -184,4 +184,18 @@ public class CharacterCustom : MonoBehaviour
         player.hatType = style;
         hatFrontRenderer.sprite = hat[style];
     }
+
+    // Tuck shirt into pants
+    public void tuckShirt()
+    {
+        if(topRenderer.sortingOrder > bottomRenderer.sortingOrder)
+        {
+            topRenderer.sortingOrder = topRenderer.sortingOrder - 1;
+            bottomRenderer.sortingOrder = bottomRenderer.sortingOrder + 1;
+        }else if(topRenderer.sortingOrder < bottomRenderer.sortingOrder)
+        {
+            topRenderer.sortingOrder = topRenderer.sortingOrder + 1;
+            bottomRenderer.sortingOrder = bottomRenderer.sortingOrder - 1;
+        }
+    }
 }

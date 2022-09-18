@@ -618,7 +618,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: b0f637afc286c3b609825b914fbea5d5
+      Hash: f63a79aa5cd5c9a579a453bad9f82cd6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Radio

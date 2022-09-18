@@ -5,6 +5,7 @@ using UnityEngine;
 public class Radio : MonoBehaviour
 {
     public AudioSource music;
+    public AudioSource doorbell;
     private bool isPlaying;
 
     public GameObject polaroid;
@@ -35,6 +36,14 @@ public class Radio : MonoBehaviour
 
     public void ExitSalon()
     {
+        StartCoroutine(Exit());
+    }
+
+    public IEnumerator Exit()
+    {
+
+        doorbell.Play();
+        yield return new WaitForSeconds(2f);
         polaroid.SetActive(true);
         polaroidPanel.SetActive(true);
     }
