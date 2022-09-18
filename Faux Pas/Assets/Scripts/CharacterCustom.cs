@@ -6,9 +6,19 @@ public class CharacterCustom : MonoBehaviour
 {
     // Item renderers
     public SpriteRenderer headRenderer;
+    public SpriteRenderer hairRenderer;
+    public SpriteRenderer hairFrontRenderer;
+    public SpriteRenderer hatFrontRenderer;
+    public SpriteRenderer eyebrowRenderer;
     public SpriteRenderer bodyRenderer;
+    public SpriteRenderer eyeRenderer;
+    public SpriteRenderer eyeColorRenderer;
+    public SpriteRenderer noseRenderer;
+    public SpriteRenderer mouthRenderer;
     public SpriteRenderer topRenderer;
     public SpriteRenderer bottomRenderer;
+    public SpriteRenderer shoeRenderer;
+    public SpriteRenderer underwearRenderer;
     
     // Player object
     public Player player;
@@ -17,18 +27,45 @@ public class CharacterCustom : MonoBehaviour
     public Sprite[] body;
     public Sprite[] head;
     public Sprite[] skin;
+    public Sprite[] nose;
+    public Sprite[] mouth;
+    public Sprite[] hair;
+    public Sprite[] hairFront;
+    public Sprite[] hat;
+    public Sprite[] eyes;
+    public Sprite[] eyeColor;
+    public Sprite[] eyebrow;
 
     // Arrays of item sprites (clothes)
     public Sprite[] topTee;
     public Sprite[] topSweater;
     public Sprite[] bottomShort;
+    public Sprite[] shoes;
+    public Sprite[] underwear;
 
     // Change skin color 
     public void changeSkin(int color)
     {
         player.skinColor = color;
+
         changeBody(player.bodyType);
         changeHead(player.headType);
+        changeNose(player.noseType);
+    }
+
+    public void changeEyeColor(int color)
+    {
+        player.eyeColor = color;
+        eyeColorRenderer.sprite = eyeColor[color];
+    }
+
+    public void changeHairColor(int color)
+    {
+        player.hairColor = color;
+        player.eyebrowType = color;
+
+        eyebrowRenderer.sprite = eyebrow[color];
+        changeHair(player.hairStyle);
     }
 
     // Change head shape
@@ -44,11 +81,36 @@ public class CharacterCustom : MonoBehaviour
             headRenderer.sprite = head[type + 4];
     }
 
+    // Change nose type
+    public void changeNose(int type)
+    {
+        player.noseType = type;
+
+        if (player.skinColor == 0)
+            noseRenderer.sprite = nose[type];
+        else if (player.skinColor == 1)
+            noseRenderer.sprite = nose[type + 1];
+        else if (player.skinColor == 2)
+            noseRenderer.sprite = nose[type + 2];
+    }
+
+    // Change shoes
+    public void changeMouth(int style)
+    {
+        player.mouthType = style;
+        mouthRenderer.sprite = mouth[style];
+    }
+
     // Change body type 
     public void changeBody(int type)
     {
+        // Update body type int
         player.bodyType = type;
 
+        // Update underwear
+        underwearRenderer.sprite = underwear[type];
+
+        // Update body based on skin tone
         if (player.skinColor == 0)
             bodyRenderer.sprite = body[type];
         else if (player.skinColor == 1)
@@ -56,8 +118,30 @@ public class CharacterCustom : MonoBehaviour
         else if (player.skinColor == 2)
             bodyRenderer.sprite = body[type + 4];
 
+        // Update clothing
         changeBottom(player.bottomType);
         changeTop(player.topType);
+    }
+
+    // Change hair color and style
+    public void changeHair(int style)
+    {
+        player.hairStyle = style;
+
+        if (player.hairColor == 0)
+        {
+            hairRenderer.sprite = hair[style];
+            hairFrontRenderer.sprite = hairFront[style];
+        }else if (player.hairColor == 1)
+        {
+            hairRenderer.sprite = hair[style + 3];
+            hairFrontRenderer.sprite = hairFront[style + 3];
+        }
+        else if (player.hairColor == 2)
+        {
+            hairRenderer.sprite = hair[style + 6];
+            hairFrontRenderer.sprite = hairFront[style + 6];
+        }
     }
 
     // Change top
@@ -85,5 +169,19 @@ public class CharacterCustom : MonoBehaviour
         {
             bottomRenderer.sprite = bottomShort[bottomType + 1];
         }
+    }
+    
+    // Change shoes
+    public void changeShoes(int style)
+    {
+        player.shoeType = style;
+        shoeRenderer.sprite = shoes[style];
+    }
+
+    // Change hat
+    public void changeHat(int style)
+    {
+        player.hatType = style;
+        hatFrontRenderer.sprite = hat[style];
     }
 }

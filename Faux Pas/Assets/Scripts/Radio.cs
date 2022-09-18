@@ -6,10 +6,16 @@ public class Radio : MonoBehaviour
 {
     public AudioSource music;
     private bool isPlaying;
+
+    public GameObject polaroid;
+    public GameObject polaroidPanel;
+
     // Start is called before the first frame update
     void Start()
     {
         isPlaying = true;
+        polaroid.SetActive(false);
+        polaroidPanel.SetActive(false);
     }
 
     public void toggleRadio()
@@ -26,4 +32,15 @@ public class Radio : MonoBehaviour
         }
     }
 
+
+    public void ExitSalon()
+    {
+        polaroid.SetActive(true);
+        polaroidPanel.SetActive(true);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

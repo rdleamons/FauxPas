@@ -10,6 +10,7 @@ public class ChangePanelTab : MonoBehaviour
     public GameObject secondTab;
     public GameObject thirdTab;
     public GameObject fourthTab;
+    public GameObject fifthTab;
 
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class ChangePanelTab : MonoBehaviour
         secondTab.SetActive(false);
         thirdTab.SetActive(false);
         fourthTab.SetActive(false);
+        fifthTab.SetActive(false);
     }
 
     // Update is called once per frame
