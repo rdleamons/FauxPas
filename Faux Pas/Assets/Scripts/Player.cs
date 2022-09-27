@@ -22,5 +22,6 @@ public class Player : MonoBehaviour
 
     public int topType;
     public int bottomType;
+    public int dressType;
     public int shoeType;
 }

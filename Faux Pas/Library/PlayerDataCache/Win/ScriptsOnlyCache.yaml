@@ -402,7 +402,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 5a6aaafcb55c90a6a31011e84a21dc2e
+      Hash: a7cd1fbd7ce37f81e733d84429c2b1e0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChangePanelTab
@@ -426,7 +426,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 22066fbc92000c4204cf916e78e86199
+      Hash: edb68520142b3d79c9b186871eec9a3c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -714,7 +714,7 @@ ScriptsOnlyBuild:
     className: CinemachineTrackedDolly
   - hash:
       serializedVersion: 2
-      Hash: cb682286bda8bde0ffe9bf9a6b030648
+      Hash: dcb270940fab0c86e10ba9f138832a42
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterCustom

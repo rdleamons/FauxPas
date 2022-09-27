@@ -40,8 +40,12 @@ public class CharacterCustom : MonoBehaviour
     public Sprite[] topTee;
     public Sprite[] topSweater;
     public Sprite[] bottomShort;
+    public Sprite[] dressSkater;
     public Sprite[] shoes;
     public Sprite[] underwear;
+
+    // Is shirt tucked
+    private bool tucked = false;
 
     // Change skin color 
     public void changeSkin(int color)
@@ -121,6 +125,9 @@ public class CharacterCustom : MonoBehaviour
         // Update clothing
         changeBottom(player.bottomType);
         changeTop(player.topType);
+
+        if(player.dressType > 1)
+            changeDress(player.dressType);
     }
 
     // Change hair color and style
@@ -147,7 +154,7 @@ public class CharacterCustom : MonoBehaviour
     // Change top
     public void changeTop(int topType)
     {
-        player.topType = topType;
+        changeDress(0);
         if (player.bodyType == 0)
         {
             topRenderer.sprite = topTee[topType];
@@ -155,20 +162,38 @@ public class CharacterCustom : MonoBehaviour
         {
             topRenderer.sprite = topTee[topType + 1];
         }
+        player.topType = topType;
+        
     }
 
     // Change bottoms
     public void changeBottom(int bottomType)
-    {
-        player.bottomType = bottomType;
-
-        if(player.bodyType == 0)
+    {     
+        if (player.bodyType == 0)
         {
             bottomRenderer.sprite = bottomShort[bottomType];
         }else if(player.bodyType == 1)
         {
             bottomRenderer.sprite = bottomShort[bottomType + 1];
         }
+        player.bottomType = bottomType;
+    }
+
+    // change dress
+    public void changeDress(int dressType)
+    {
+        if (tucked)
+            tuckShirt();
+
+        if (player.bodyType == 0)
+        {
+            topRenderer.sprite = dressSkater[dressType];
+        }
+        else if (player.bodyType == 1)
+        {
+            topRenderer.sprite = dressSkater[dressType + 1];
+        }
+        player.dressType = dressType;
     }
     
     // Change shoes
@@ -188,14 +213,21 @@ public class CharacterCustom : MonoBehaviour
     // Tuck shirt into pants
     public void tuckShirt()
     {
-        if(topRenderer.sortingOrder > bottomRenderer.sortingOrder)
+        if(player.dressType < 2)
         {
-            topRenderer.sortingOrder = topRenderer.sortingOrder - 1;
-            bottomRenderer.sortingOrder = bottomRenderer.sortingOrder + 1;
-        }else if(topRenderer.sortingOrder < bottomRenderer.sortingOrder)
-        {
-            topRenderer.sortingOrder = topRenderer.sortingOrder + 1;
-            bottomRenderer.sortingOrder = bottomRenderer.sortingOrder - 1;
+            if (topRenderer.sortingOrder > bottomRenderer.sortingOrder)
+            {
+                topRenderer.sortingOrder = topRenderer.sortingOrder - 1;
+                bottomRenderer.sortingOrder = bottomRenderer.sortingOrder + 1;
+                tucked = true;
+            }
+            else if (topRenderer.sortingOrder < bottomRenderer.sortingOrder)
+            {
+                topRenderer.sortingOrder = topRenderer.sortingOrder + 1;
+                bottomRenderer.sortingOrder = bottomRenderer.sortingOrder - 1;
+                tucked = false;
+            }
         }
+        
     }
 }
